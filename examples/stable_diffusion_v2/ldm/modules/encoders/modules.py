@@ -9,6 +9,7 @@ from ldm.modules.diffusionmodules.upscaling import ImageConcatWithNoiseAugmentat
 import mindspore as ms
 import mindspore.nn as nn
 import mindspore.ops as ops
+import mindspore.mint as mint
 from mindspore import Tensor
 from mindspore.common.initializer import TruncatedNormal, initializer
 
@@ -308,7 +309,7 @@ class CLIPEmbeddingNoiseAugmentation(ImageConcatWithNoiseAugmentation):
         self.dtype = ms.float16 if use_fp16 else ms.float32
 
         if clip_stats_path is None:
-            clip_mean, clip_std = ops.zeros(timestep_dim), ops.ones(timestep_dim)
+            clip_mean, clip_std = mint.zeros(timestep_dim), mint.ones(timestep_dim)
         else:
             _logger.info(f"Loading CLIP stats from {clip_stats_path}")
             clip = ms.load_checkpoint(clip_stats_path)
