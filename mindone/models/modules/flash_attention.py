@@ -102,7 +102,7 @@ class MSFlashAttention(nn.Cell):
                 B, S = x.shape[:2]
                 x = x.reshape(B, S, -1, self.head_dim)
                 pad = mint.zeros((B, S, x.shape[2], self.d_pad), x.dtype)
-            x = mint.cat((x, pad), dim=-1)
+            x = mint.concat((x, pad), dim=-1)
         if self.input_layout == "BSH":
             B, S = x.shape[:2]
             x = x.reshape(B, S, -1)
